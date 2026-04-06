@@ -1,16 +1,22 @@
-const express = require('express');
-const cors = require('cors');
-require('dotenv').config();
+const express = require("express");
+const cors = require("cors");
+require("dotenv").config();
+
+const authRoutes = require("./routes/authRoutes");
+const workoutRoutes = require("./routes/workoutRoutes");
 
 const app = express();
 
-// Middlewares
 app.use(cors());
 app.use(express.json());
 
+// Rotas
+app.use("/auth", authRoutes);
+app.use('/workouts', workoutRoutes);
+
 // Rota de teste
-app.get('/', (req, res) => {
-  res.json({ message: 'API Workout App funcionando!' });
+app.get("/", (req, res) => {
+  res.json({ message: "API Workout App funcionando!" });
 });
 
 module.exports = app;
